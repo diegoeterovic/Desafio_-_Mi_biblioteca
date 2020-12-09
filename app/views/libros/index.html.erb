@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tu biblioteca</h1>
+
+ <%= search_form_for @q do |f| %>
+  <%= f.label :state %>
+  <%= f.select :state_eq, options_for_select([:true, :false])%>
+  <%= f.submit %>
+
+
+  <% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :title) %></th>
+      <th>Autor</th>
+      <th>Prestado</th>
+      <th>Prestado el</th>
+      <th>Devuelto el</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @libros.each do |libro| %>
+      <tr>
+        <td><%= libro.title %></td>
+        <td><%= libro.author %></td>
+        <td><%= libro.state %></td>
+        <td><%= libro.lended_at %></td>
+        <td><%= libro.returned_at %></td>
+        <td><%= link_to 'Show', libro %></td>
+        <td><%= link_to 'Edit', edit_libro_path(libro) %></td>
+        <td><%= link_to 'Destroy', libro, method: :delete, data: { confirm: 'Seguro que quieres Borrar' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Libro', new_libro_path %>
+
+
